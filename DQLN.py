@@ -13,7 +13,7 @@ class ReplayBuffer(object):
     def __init__(self, max_size, input_shape, n_actions, discrete=False):
         self.mem_size = max_size
         self.mem_cntr = 0
-        self.input_shape = input_shape  # Fixed typo: was "inpout_shape"
+        self.input_shape = input_shape
         self.discrete = discrete # whether to represent as a vector or as one-hot encoding
         self.state_memory = np.zeros((self.mem_size, input_shape))
         self.new_state_memory = np.zeros((self.mem_size, input_shape))
@@ -68,7 +68,7 @@ def build_dpqn(lr, n_actions, input_dims, fcl_dims, fc2_dims):
     # this is very simple, even more so than PyTorch
 
 class Agent(object):
-    def __init__(self, alpha, gamma, n_actions, epsilon, batch_size, input_dims, epsilon_dec=0.996, epsilon_end=0.01, mem_size=10000000, fname='dqn_model.h5'):
+    def __init__(self, alpha, gamma, n_actions, epsilon, batch_size, input_dims, epsilon_dec=0.996, epsilon_end=0.01, mem_size=10000000, fname='dqn_model.keras'):
         # gamma is our discount factor, epsilon for explore / exploit
         # need to look up why you want epsilon to gradually decrease (maybe less exploring over time?)
         # epsilon doesn't become 0 in testing, as you always want some exploring
@@ -133,7 +133,7 @@ class Agent(object):
         # then use q_target as target for loss function of q network
 
     def save_model(self):
-        self.q_eval.save(self.model_file, save_format="tf")
+        self.q_eval.save(self.model_file)
 
     def load_model(self):
         self.q_eval = keras.models.load_model(self.model_file)

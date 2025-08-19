@@ -46,7 +46,7 @@ if __name__ == '__main__':
         
        
         print("Creating agent...")
-        agent = Agent(alpha=0.0005, gamma=0.99, n_actions=4, epsilon=1.0, batch_size=64, input_dims=8, epsilon_dec=0.996, epsilon_end=0.01, mem_size=1000000, fname='dqn_model')
+        agent = Agent(alpha=0.0005, gamma=0.99, n_actions=4, epsilon=1.0, batch_size=64, input_dims=8, epsilon_dec=0.996, epsilon_end=0.01, mem_size=1000000, fname='dqn_model.keras')
         print("Agent created successfully")
 
         scores = []
