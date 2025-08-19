@@ -82,7 +82,14 @@ class Agent(object):
         self.model_file = fname
 
         self.memory = ReplayBuffer(mem_size, input_dims, n_actions, discrete=True)
-        self.q_eval = build_dpqn(alpha, n_actions, input_dims, 256, 256)
+
+        # ✅ Load model if it exists, else create a new one
+        if os.path.exists(self.model_file):
+            print(f"Loading existing model from {self.model_file}...")
+            self.q_eval = keras.models.load_model(self.model_file)
+        else:
+            print("No saved model found. Building new model...")
+            self.q_eval = build_dpqn(alpha, n_actions, input_dims, 256, 256)
 
     def remember(self, state, action, reward, new_state, done):
         self.memory.store_transition(state, action, reward, new_state, done)
