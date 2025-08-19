@@ -83,7 +83,7 @@ class Agent(object):
 
         self.memory = ReplayBuffer(mem_size, input_dims, n_actions, discrete=True)
 
-        # ✅ Load model if it exists, else create a new one
+        # Load model if it exists, else create a new one
         if os.path.exists(self.model_file):
             print(f"Loading existing model from {self.model_file}...")
             self.q_eval = keras.models.load_model(self.model_file)
