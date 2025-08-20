@@ -112,7 +112,7 @@ class Agent(object):
         # learns on every step - temporal difference
         # we have created our memory with zeroes - do we pick random numbers, or just start learning? Latter here, but we have to wait until we've filled up a batch before we start learning
         if self.memory.mem_cntr < self.batch_size:
-            return  # Fixed typo: was "returb"
+            return  
             
         state, action, reward, new_state, done = \
                                 self.memory.sample_buffer(self.batch_size)
